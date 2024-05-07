@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useRef, useState } from "react"
-import KeyboardDownArrow from '../assets/icons/keyboard-down-arrow.svg';
+import KeyboardDownArrow from '../assets/icons/arrow-down-black.svg';
 import LocationIcon from '../assets/icons/location.svg';
 
 const DropDown = ({ data, placeholder }) => {
     const [isOpenDropDown, setIsOpenDropDown] = useState(false);
     const [selectIndex, setSelectIndex] = useState(0);
     const [selectedItem, setSelectedItem] = useState(placeholder);
+    const [listData, setListData] = useState(data);
     const dropdownRef = useRef(null);
 
     const handleOpenDropDown = () => setIsOpenDropDown(!isOpenDropDown);
@@ -15,6 +16,15 @@ const DropDown = ({ data, placeholder }) => {
         setSelectIndex(index);
         setIsOpenDropDown(false);
         setSelectedItem(name);
+    }
+
+    const filterListItem = (e) => {
+        const searchInputText = e.target.value.toLowerCase();
+        let searchFromList = data.filter((item) => item.toLowerCase().includes(searchInputText));
+        // console.log(filteredData);
+
+        const removeDuplicateFromSearchList = searchFromList.filter((item, index) => searchFromList.indexOf(item) === index);
+        setListData(removeDuplicateFromSearchList);
     }
 
     useEffect(() => {
@@ -34,7 +44,7 @@ const DropDown = ({ data, placeholder }) => {
         };
     }, []);
 
-    // location dropdown styling
+    // location-dropdown styling
     const style = {
         minWidth: placeholder === 'Your Location' ? '180px' : '',
         border: placeholder === 'Your Location' ? '1px solid rgba(0,0,0,0.2)' : '',
@@ -58,34 +68,38 @@ const DropDown = ({ data, placeholder }) => {
 
             <div className="flex justify-between items-center" style={style}>
                 {
-                    placeholder == 'Your Location' ? <img src={LocationIcon} alt="" className="opacity-50"/> : ''
+                    placeholder == 'Your Location' ? <img src={LocationIcon} alt="" className="opacity-50" /> : ''
                 }
-                <span className="block min-w-fit text-base" onClick={handleOpenDropDown} style={locationColor}>{selectedItem}</span>
+                <span className="block w-fit text-base" onClick={handleOpenDropDown} style={locationColor}>
+                    {selectedItem.length > 14 ? selectedItem.substr(0, 14) + '...' : selectedItem}
+                </span>
                 <img src={KeyboardDownArrow} />
             </div>
 
             {
                 isOpenDropDown ?
                     (
-                        <div className="w-[250px] h-auto bg-[#fff] absolute top-[160%] -left-5 z-50 shadow-md p-4" style={positionStyle}>
+                        <div className="w-[250px] h-auto bg-[#fff] absolute top-[150%] -left-5 z-50 shadow-md p-4 rounded" style={positionStyle}>
 
                             <div>
-                                <input type="text" className="w-full h-12 border border-[#bce3c9] outline-none px-4" />
+                                <input type="text" className="w-full h-12 border border-[#bce3c9] outline-none px-4"
+                                    onChange={filterListItem}
+                                    placeholder='Search here...'
+                                />
                             </div>
 
-                            <ul className="w-full m-0 py-3 text-lg max-h-80 overflow-y-scroll mt-2 search-result text-black text-opacity-70">
+                            <ul className="w-full m-0 p-4 text-lg max-h-80 overflow-y-scroll mt-2 search-result text-black text-opacity-70">
 
-                                <li className={`w-full p-2 hover:bg-[#3bb77e] hover:text-white ${selectIndex === 0 ? 'active-category' : ''}`}
+                                <li className={`w-full p-2 hover:bg-custom-green hover:text-white ${selectIndex === 0 ? 'active-category' : ''}`}
                                     onClick={() => handleCloseDropDown(0, item)}
                                     key={`index-${0}`}>
                                     {placeholder}
                                 </li>
 
                                 {
-                                    data.map((item, index) =>
-
+                                    listData.map((item, index) =>
                                         <li
-                                            className={`w-full p-2 hover:bg-[#3bb77e] hover:text-white 
+                                            className={`w-full p-2 hover:bg-custom-green hover:text-white rounded-sm
                                     ${selectIndex === index + 1 ? 'active-category' : ''}`}
                                             onClick={() => handleCloseDropDown(index + 1, item)}
                                             key={`index-${index + 1}`}
