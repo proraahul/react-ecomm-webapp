@@ -64,7 +64,7 @@ const DropDown = ({ data, placeholder }) => {
 
 
     return (
-        <div className="col-span-4 font-medium cursor-pointer relative w-[150px]" ref={dropdownRef}>
+        <div className="col-span-4 font-medium cursor-pointer relative" ref={dropdownRef}>
 
             <div className="flex justify-between items-center" style={style}>
                 {

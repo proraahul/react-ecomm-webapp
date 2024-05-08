@@ -7,6 +7,8 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* Header Css */
+
 .search-result::-webkit-scrollbar {
   width: 5px !important;
 }
@@ -15,40 +17,68 @@
   background: #ccc !important;
 }
 
-.active-category{
+.active-category {
   background-color: #f1f1f1;
   color: black;
 }
-.container-fluid{
-  padding: 0px 45px;
-}
-.bg-green{
-  background: #3bb77e;
-}
-.text-green{
-  color: #3bb77e;
+
+/* Nav Css */
+
+.container-fluid {
+  padding: 0px 30px;
 }
 
-.dropdown-menu{
+.box-shadow{
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.dropdown-menu {
   opacity: 0;
   visibility: hidden;
   transition: all 0.1s ease-in-out;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  z-index: 50 !important;
 }
-.list-item:hover .dropdown-menu{
+
+.list-item:hover .dropdown-menu {
   opacity: 1;
   visibility: inherit;
   top: 110%;
 }
-.slick-arrow {
-  position: absolute;
-  width: 50px !important;
-height: 50px !important;
-border-radius: 50% !important;
-/* background: red !important; */
-right: 0 !important;
-z-index: 100;
+
+.heading{
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 25px;
 }
-.slick-prev{
-    left: 0 !important;
+
+/* Banner Css */
+.transition-banner{
+  transition: all 0.3s ease-in-out;
+}
+
+.banner-section .banner img:hover {
+    transform: scale(1.1);
+}
+
+/* Homepage home products css */
+.filterTab li a{
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+.filterTab li:hover a{
+  color: #3bb77e;
+  /* transform: translateY(-10px); */
+  top: -5px;
+
+}
+.productThumb{
+  transition: all 0.3s ease-in-out;
+}
+.productThumb:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.productThumb .imgWrapper img{transition: all 0.3s ease-in-out;}
+.productThumb:hover .imgWrapper img{
+    transform: scale(1.1);
 }

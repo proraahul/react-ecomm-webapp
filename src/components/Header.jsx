@@ -11,7 +11,7 @@ import SettingIcon from '../assets/icons/setting.svg';
 import VoucherIcon from '../assets/icons/voucher-icon.svg';
 import TrackingIcon from '../assets/icons/tracking-icon.svg';
 import { useRef } from 'react';
-import Nav from './nav/Nav';
+import Nav from './Nav';
 import { MIDDLE_HEADER_DATA } from '../constants/header';
 
 
@@ -77,40 +77,44 @@ const Header = () => {
 
     return (
         <>
-            <header className="w-full h-auto m-auto px-6">
+            <header className="w-full h-auto m-auto px-3">
             <div className='py-9'>
-                <div className='grid sm:grid-cols-12 items-center sm:gap-x-5'>
+                <div className='grid grid-cols-12 items-center gap-x-2'>
 
-                    <div className='sm:col-span-2'>
+                    <div className='col-span-2'>
                         <img src={Logo} alt="nest mart and grocery logo" />
                     </div>
 
                     {/* header search start here */}
-                    <div className='sm:col-span-5'>
-                        <div className='w-full h-14 grid grid-cols-12 items-center border border-[#bce3c9] px-5 py-3 text-base'>
-                            <DropDown data={categories} placeholder={'All Categories'} />
+                    <div className='col-span-5'>
+                        <div className='w-full h-auto border border-[#bce3c9] px-5 py-3 text-base grid grid-cols-12'>
+
+                        
+                        <DropDown data={categories} placeholder={'All Categories'} />
+                      
+
                             <div className="col-span-8 border-l-2 pl-5 flex cursor-pointer">
-                                <input type="text" placeholder='Search for items...' className='w-full outline-none border-none' />
+                                <input type="text" placeholder='Search for items...' className='w-full outline-none border-none h-full' />
                                 <img src={SearchIcon} alt="search icon image" className='opacity-70' />
                             </div>
                         </div>
                     </div>
                     {/* header search end here */}
 
-                    <div className='sm:col-span-5 flex items-center'>
-                        <div className='ml-auto flex items-center'>
-                            <div >
-                                <DropDown data={countryList} placeholder={'Your Location'} />
-                            </div>
+                    <div className='col-span-5'>
+                        <div className='items-center grid grid-cols-12'>
 
-                            <ul className='pl-14 flex gap-3'>
+                                <DropDown data={countryList} placeholder={'Your Location'} />
+
+
+                            <ul className='flex col-span-8 '>
 
                                 {
                                     MIDDLE_HEADER_DATA.map((item, index) => {
                                         return (
-                                            <li className='relative' key={index}>
-                                                <span className='text-base cursor-pointer flex items-center'>
-                                                    <img src={item.imgSrc} alt={item.spanTag} className='mr-2' />
+                                            <li className='mr-5 relative' key={index}>
+                                                <span className='cursor-pointer flex items-center'>
+                                                    <img src={item.imgSrc} alt={item.spanTag} className='px-1' />
                                                     <span className='bg-custom-green rounded-full w-5 h-5 flex justify-center items-center text-white font-normal absolute -top-2 left-3'>3</span>
                                                     {item.spanTag}
                                                 </span>
@@ -119,16 +123,17 @@ const Header = () => {
                                     })
                                 }
 
-                                <li className='relative' onClick={() => setIsOpenAccount(!isOpenAccount)}>
+                                <li className='relative mr-5' 
+                                onClick={() => setIsOpenAccount(!isOpenAccount)}>
                                     <span className='text-base cursor-pointer flex items-center relative'>
-                                        <img src={UserIcon} alt="" className='mr-2' />
+                                        <img src={UserIcon} alt="user icon" />
                                         Account
                                     </span>
 
                                     {/* dropdown show on hover account  */}
                                     {
                                         isOpenAccount && (
-                                            <ul className='p-2 w-52 absolute top-[140%] -right-3 h-auto bg-white backdrop-blur-3xl shadow-md text-base text-black' ref={dropdownRef}>
+                                            <ul className='p-2 w-52 absolute top-[140%] -right-3 h-auto bg-white backdrop-blur-3xl box-shadow text-base text-black z-50' ref={dropdownRef}>
                                                 <li className='flex py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>
                                                     <img src={UserAccountIcon} className='opacity-70 mr-2' alt="user account icon" />
                                                     <button className="w-full text-left justify-start">My Account</button>
