@@ -33,11 +33,13 @@ const CategorySlider = () => {
         slidesToScroll: 1,
         fade: false,
         arrows: true,
+        autoplay: 2000,
+        centerMode: true, 
     };
 
 
     return (
-        <div className="cartslidersection">
+        <div className="cart-slider__section">
             <div className="container-fluid">
                 <h2 className="heading">Featured Categories</h2>
                 <Slider {...settings} className='cat-slider__main'>

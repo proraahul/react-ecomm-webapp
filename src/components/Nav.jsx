@@ -10,7 +10,7 @@ const Nav = () => {
 
 
   return (
-    <div className="w-full h-auto border-t border-b border-[rgba(0,0,0,0.1)] flex items-center">
+    <div className="w-full h-auto border-t border-b border-[rgba(0,0,0,0.1)] flex items-center z-50">
       <div className="container-fluid grid grid-cols-12 items-center relative">
 
           <div className="col-span-3">
@@ -46,7 +46,7 @@ const Nav = () => {
 
                   {/* show when Hover on Mega menu */}
 {/* */}
-                  <div className='p-2 w-full absolute top-[160%] left-0 h-auto bg-white text-base text-black font-medium dropdown-menu'>
+                  <div className='p-2 w-full absolute top-[160%] left-0 h-auto bg-white text-base text-black font-medium dropdown-menu backdrop-blur-3xl box-shadow'>
 
                    <div className='grid grid-cols-12 p-6'>
                    <div className='col-span-3'>
@@ -147,7 +147,7 @@ const Nav = () => {
 
                   {/* pages dropdown on hover*/}
 
-                  <ul className='p-2 w-60 absolute top-[160%] h-auto bg-white text-base text-black font-medium dropdown-menu z-50'>
+                  <ul className='p-2 w-60 absolute top-[160%] h-auto bg-white text-base text-black font-medium dropdown-menu backdrop-blur-3xl box-shadow'>
 
                     <Link to={'/about'} className='py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>About Us</Link>
                     <Link className='flex py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>Contact</Link>
