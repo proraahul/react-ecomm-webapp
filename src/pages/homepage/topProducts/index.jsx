@@ -6,6 +6,7 @@ import Thumbnail3 from '../../../assets/images/thumbnail-3.jpg';
 
 const TopProducts = ({ title }) => {
     return (
+        
         <div className="box">
             <h3 className="relative text-xl font-medium pb-3 mb-7
                     after:content-[''] after:w-full after:h-[3px] after:bg-[#ccc] after:absolute after:bottom-0 after:left-0

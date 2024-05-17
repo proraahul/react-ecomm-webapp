@@ -42,7 +42,7 @@
 /* Nav Css */
 
 .container-fluid {
-  padding: 0px 30px;
+  padding: 0px 40px;
 }
 
 .box-shadow{
@@ -114,4 +114,37 @@
 
 .box .items:hover{
   transform: translateY(-10px);
+}
+
+/* News Letter Bg */
+.news-letter__bg{
+  background: url(./assets/images/bg.png);
+}
+
+.news-letter__section .news-letter__bg .news-letter__banner{
+  position: relative !important;
+  top: 30px;
+  left: 0;
+}
+
+/* Footer */
+.footer-wrapper .footer-boxes .footer-box img{
+  transition: all 0.2s ease-in-out;
+}
+.footer-wrapper .footer-boxes .footer-box:hover img{
+transform: translateY(-5px);
+}
+footer ul li a{
+  transition: all 0.2s ease-in-out;
+}
+footer .footer-part2 ul li a:hover{
+  color: #3bb77e;
+  opacity: 1;
+  padding-left: 2px;
+}
+footer .bottom-footer .bottom-footer__part3 ul li a{
+transition: all 0.2s ease-in-out;
+}
+footer .bottom-footer .bottom-footer__part3 ul li a:hover{
+  background: rgb(51,51,51);
 }

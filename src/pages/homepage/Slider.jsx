@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider1 from '../../assets/images/slider-1.png';
 import Slider2 from '../../assets/images/slider-2.png';
 import './slider.css'
+import NewsLetter from "../../components/newsletter";
 
 const HomeSlider = () => {
 
@@ -44,11 +45,7 @@ const HomeSlider = () => {
         
         </Slider>
 
-        <div className="w-110 h-12 absolute bottom-28 left-[7%] bg-white rounded-3xl flex items-center ">
-        <i className="fa fa-paper-plane-o ml-5 opacity-50" aria-hidden="true"></i>
-            <input type="text" placeholder="Your email address" className="w-full h-full rounded-3xl  border-none outline-none pl-6 pr-6 text-sm"/>
-            <button className="bg-custom-green text-white py-3 px-5 rounded-3xl font-medium">Subscribe</button>
-        </div>
+        <NewsLetter />
 
         </div>
     </section>
