@@ -6,9 +6,6 @@ import Product from "../../components/product";
 import HomeSlider from "./Slider";
 import Slider from "react-slick";
 import TopProducts from '../homepage/topProducts';
-import NewsLetterImg from '../../assets/images/newsletter.png';
-import BgNewsLetter from '../../assets/images/bg.png';
-import NewsLetter from "../../components/newsletter";
 
 const HomePage = () => {
 
@@ -155,20 +152,6 @@ const HomePage = () => {
             </div>
       </section>
 
-      <section className="w-full h-auto news-letter__section"> 
-        <div className="container-fluid">
-          <div className="w-full h-auto news-letter__bg flex items-center py-10 px-20 rounded-2xl"> 
-          <div className="w-[55%]" > 
-                <h2 className="text-3xl font-medium text-faded-black mb-5 opacity-80">Stay home & get your daily <br /> needs from our shop</h2>
-                <p className="text-base text-light-black font-medium opacity-80">Start You'r Daily Shopping with <span className="text-custom-green">Nest Mart</span></p>
-                <NewsLetter />
-          </div>
-          <div className="w-[45%]">
-          <img src={NewsLetterImg} alt="" className="w-full relative top-10"/>
-          </div>
-          </div>
-        </div>
-      </section>
 
     </>
   )

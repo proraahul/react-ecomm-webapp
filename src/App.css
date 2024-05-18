@@ -148,3 +148,38 @@ transition: all 0.2s ease-in-out;
 footer .bottom-footer .bottom-footer__part3 ul li a:hover{
   background: rgb(51,51,51);
 }
+
+/* Product Listing Home Route */
+
+.sidebar .cat-list .cat-item{
+  transition: all 0.3s ease-in-out;
+  border: 1px solid rgba(0, 0, 0, 0.050);
+}
+.sidebar .cat-list .cat-item:hover{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.sidebar .filters ul{
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.sidebar .filters ul li{
+  font-size: 14px !important;
+  margin: -10px 0;
+}
+.sidebar .filters ul::-webkit-scrollbar{
+  width: 5px !important;
+}
+.sidebar .filters ul::-webkit-scrollbar-thumb{
+  background: #ccc !important;
+}
+
+ .btn{
+  transition: all 0.2s ease-in-out;
+}
+.listing-page .sidebar-wrapper{
+  flex: 0 0 20%;
+}
+.listing-page .product-wrapper{
+  flex: 0 0 80%;
+}

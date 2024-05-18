@@ -42,7 +42,7 @@ const Nav = () => {
                   <button className='py-4 px-2 hover:text-custom-green'> <Link> Vendors </Link> </button>
                 </li>
                 <li className='static list-item'>
-                  <button className='py-4 px-2 hover:text-custom-green flex'> <Link>Mega menu</Link><img src={BlackDownArrow} /> </button>
+                  <button className='py-4 px-2 hover:text-custom-green flex'><Link>Mega menu</Link><img src={BlackDownArrow} /></button>
 
                   {/* show when Hover on Mega menu */}
 {/* */}

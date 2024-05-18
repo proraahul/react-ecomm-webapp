@@ -17,9 +17,28 @@ import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import XIcon from '@mui/icons-material/X';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import NewsLetterImg from '../assets/images/newsletter.png';
+import NewsLetter from "../components/newsletter";
 
 const Footer = () => {
   return (
+    <>
+
+<section className="w-full h-auto news-letter__section"> 
+        <div className="container-fluid">
+          <div className="w-full h-auto news-letter__bg flex items-center py-10 px-20 rounded-2xl"> 
+          <div className="w-[55%]" > 
+                <h2 className="text-3xl font-medium text-faded-black mb-5 opacity-80">Stay home & get your daily <br /> needs from our shop</h2>
+                <p className="text-base text-light-black font-medium opacity-80">Start You'r Daily Shopping with <span className="text-custom-green">Nest Mart</span></p>
+                <NewsLetter />
+          </div>
+          <div className="w-[45%]">
+          <img src={NewsLetterImg} alt="" className="w-full relative top-10"/>
+          </div>
+          </div>
+        </div>
+      </section>
+
     <div className="footer-wrapper w-full mt-11">
       {/* Top Footer 5 Boxes */}
       <div className="footer-boxes container-fluid">
@@ -208,6 +227,8 @@ const Footer = () => {
 
 
     </div>
+    </>
+
   )
 }
 
