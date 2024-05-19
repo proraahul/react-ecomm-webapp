@@ -10,6 +10,7 @@ export default {
         'custom-green': '#3bb77e',
         'faded-black' : 'rgba(0,0,0,0.7)',
         'light-black' : '#7E7E7E',
+        'yellow-hover' : '#FDC040',
         
       },
       spacing:{

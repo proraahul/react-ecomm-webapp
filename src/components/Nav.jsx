@@ -30,7 +30,7 @@ const Nav = () => {
                   <button className='py-4 px-2 hover:text-custom-green'> <Link> Deals </Link> </button>
                 </li> */}
                 <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link> Home </Link> </button>
+                  <button className='py-4 px-2 hover:text-custom-green'> <Link to={'/listing'}> Home </Link> </button>
                 </li>
                 <li>
                   <button className='py-4 px-2 hover:text-custom-green'> <Link> About </Link> </button>

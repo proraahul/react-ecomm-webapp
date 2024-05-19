@@ -14,7 +14,7 @@ const ErrorPage = () => {
                          </p>
 
                          <div className="mt-4">
-                            <button className="bg-custom-green text-white py-2 px-7 rounded-sm btn hover:bg-[#FDC040]" onClick={() => navToHome('/')}>Back to Homepage</button>
+                            <button className="bg-custom-green text-white py-2 px-7 rounded-sm btn hover:bg-yellow-hover" onClick={() => navToHome('/')}>Back to Homepage</button>
                          </div>
                     </div>
                 </div>
