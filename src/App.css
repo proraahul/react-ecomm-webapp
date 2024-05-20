@@ -273,3 +273,18 @@ input[type="number"] {
 .add-to-cart .move:hover {
   transform: translateY(-3px);
 }
+
+table{
+  width: 100%;
+}
+table, th, tr{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+th{
+text-align: left;
+}
+
+th, td, p{
+  padding: 5px 2px;
+  padding-right: 40px;
+}

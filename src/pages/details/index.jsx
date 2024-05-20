@@ -21,6 +21,7 @@ const DetailPage = () => {
     const [smallSizeImg, setSmallSizeImg] = useState([150, 150]);
     const [isActiveSize, setIsActiveSize] = useState(0);
     const [cartInputValue, setCartInputValue] = useState(1);
+    const [activeTab, setActiveTab] = useState(2);
 
     var settings2 = {
         dots: false,
@@ -62,6 +63,7 @@ const DetailPage = () => {
                     <li className="inline"><Link className="text-sm">Vegetables & Tubers</Link></li>
                     <li className="text-sm">Seeds Of Change Organic</li>
                 </ul>
+
                 <div className="container-fluid details-container">
                     <div className="grid grid-cols-12">
                         <div className="col-span-9">
@@ -192,16 +194,254 @@ const DetailPage = () => {
                                 </div>
                                 {/* product info code end here */}
                             </div>
+
+                            {/* details page tabs */}
+                            <div className="details-page__tabs mt-5 mr-10 p-5 border rounded-lg">
+                                <div className="custom-tabs">
+                                    <ul className="flex items-center gap-x-14">
+                                        <li><button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(0)}>Description</button></li>
+                                        <li><button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(1)}>Additional info</button></li>
+                                        {/* <li><button>Vendor</button></li> */}
+                                        <li><button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(2)}>Reviews (3)</button></li>
+                                    </ul>
+                                    <br />
+
+                                    {
+                                        activeTab === 0 &&
+                                        <div className="tab-content">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis aperiam veniam quas omnis quasi esse quaerat harum. Exercitationem debitis numquam, expedita et, ab explicabo beatae quia architecto ullam pariatur alias? Obcaecati, maxime expedita suscipit nemo officia nisi ipsa aut ea!</p>
+
+                                            <p className="mt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores, atque ex? Est eaque dolor quas incidunt, aspernatur in voluptatibus tenetur? Repellendus, incidunt! Omnis non suscipit fugiat earum mollitia odit a vitae voluptas fuga provident incidunt ea ipsam, rem minima dolorum, dolor deleniti quas ipsa. Quae.</p>
+
+
+                                            <h2 className="text-xl font-medium my-2 mt-7">Packaging & Delivery</h2>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis aperiam veniam quas omnis quasi esse quaerat harum. Exercitationem debitis numquam, expedita et, ab explicabo beatae quia architecto ullam pariatur alias? Obcaecati, maxime expedita suscipit nemo officia nisi ipsa aut ea!</p>
+
+                                            <p className="mt-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Asperiores, atque ex? Est eaque dolor quas incidunt, aspernatur in voluptatibus tenetur? Repellendus, incidunt! Omnis non suscipit fugiat earum mollitia odit a vitae voluptas fuga provident incidunt ea ipsam, rem minima dolorum, dolor deleniti quas ipsa. Quae.</p>
+
+                                            <h2 className="text-xl font-medium my-3 mt-7">Suggested Use</h2>
+                                            <p>Refrigration not neccesary</p>
+                                            <p className="mt-2">Stir before serving</p>
+
+                                            <h2 className="text-xl font-medium my-3 mt-7">Other Ingredients</h2>
+                                            <p>Lorem ipsum dolor sit amet.</p>
+                                            <p className="my-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam, repudiandae.</p>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit neque laboriosam quod consequatur! Dignissimos, porro?</p>
+
+                                            <h2 className="text-xl font-medium my-3 mt-7">Warnings</h2>
+
+                                        </div>
+                                    }
+
+                                    {
+                                        activeTab === 1 &&
+                                        <div className="tab-content">
+                                            <div className="table">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th>Stand Up</th>
+                                                            <td>
+                                                                <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Folded (w/o wheels)</th>
+                                                            <td>
+                                                                <p>32.5″L x 18.5″W x 16.5″H</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Folded (w/ wheels)</th>
+                                                            <td>
+                                                                <p>32.5″L x 24″W x 18.5″H</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Door Pass Through</th>
+                                                            <td>
+                                                                <p>24</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Frame</th>
+                                                            <td>
+                                                                <p>Aluminum</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Weight (w/o wheels)</th>
+                                                            <td>
+                                                                <p>20 LBS</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Weight Capacity</th>
+                                                            <td>
+                                                                <p>60 LBS</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Width</th>
+                                                            <td>
+                                                                <p>24″</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Handle height (ground to handle)</th>
+                                                            <td>
+                                                                <p>37-45″</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Wheels</th>
+                                                            <td>
+                                                                <p>12″ air / wide track slick tread</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Seat back height</th>
+                                                            <td>
+                                                                <p>21.5″</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Head room (inside canopy)</th>
+                                                            <td>
+                                                                <p>25″</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Color</th>
+                                                            <td>
+                                                                <p>Black, Blue, Red, White</p>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Size</th>
+                                                            <td>
+                                                                <p>M, S</p>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    {
+                                        activeTab === 2 &&
+                                        <div className="tab-content">
+                                            <div className="grid grid-cols-12">
+                                                <div className="col-span-8">
+                                                    <h2>Customer questions & answers</h2>
+                                                    <div className="review-card border p-4 mt-5 rounded-lg flex items-center justify-center overflow-hidden gap-x-3 mb-6">
+                                                        <div className="review-user-profile">
+                                                            <div className="image">
+                                                                <img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-2.png" alt="" className="w-60 object-cover" />
+                                                            </div>
+                                                            <span className="text-custom-green mt-1 font-medium text-lg block text-center">Sienna</span>
+                                                        </div>
+                                                        <div className="review-info">
+                                                            <div className="rating-date flex justify-between items-center">
+                                                                <span className="opacity-60 text-xs">December 4, 2022 at 3:12 pm</span>
+                                                                <Rating name="half-rating-read" defaultValue={3.5} precision={0.5} readOnly />
+                                                            </div>
+                                                            <p className="text-gray-600 w-full pr-0 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae iure nemo, voluptate repellat ipsa in. Id commodi accusantium totam impedit dolores aspernatur vero, hic magni?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="review-card border p-4 mt-5 rounded-lg flex items-center justify-center overflow-hidden gap-x-3 mb-6">
+                                                        <div className="review-user-profile">
+                                                            <div className="image">
+                                                                <img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-2.png" alt="" className="w-60 object-cover" />
+                                                            </div>
+                                                            <span className="text-custom-green mt-1 font-medium text-lg block text-center">Sienna</span>
+                                                        </div>
+                                                        <div className="review-info">
+                                                            <div className="rating-date flex justify-between items-center">
+                                                                <span className="opacity-60 text-xs">December 4, 2022 at 3:12 pm</span>
+                                                                <Rating name="half-rating-read" defaultValue={3.5} precision={0.5} readOnly />
+                                                            </div>
+                                                            <p className="text-gray-600 w-full pr-0 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae iure nemo, voluptate repellat ipsa in. Id commodi accusantium totam impedit dolores aspernatur vero, hic magni?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="review-card border p-4 mt-5 rounded-lg flex items-center justify-center overflow-hidden gap-x-3 mb-6">
+                                                        <div className="review-user-profile">
+                                                            <div className="image">
+                                                                <img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-2.png" alt="" className="w-60 object-cover" />
+                                                            </div>
+                                                            <span className="text-custom-green mt-1 font-medium text-lg block text-center">Sienna</span>
+                                                        </div>
+                                                        <div className="review-info">
+                                                            <div className="rating-date flex justify-between items-center">
+                                                                <span className="opacity-60 text-xs">December 4, 2022 at 3:12 pm</span>
+                                                                <Rating name="half-rating-read" defaultValue={3.5} precision={0.5} readOnly />
+                                                            </div>
+                                                            <p className="text-gray-600 w-full pr-0 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae iure nemo, voluptate repellat ipsa in. Id commodi accusantium totam impedit dolores aspernatur vero, hic magni?</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="review-card border p-4 mt-5 rounded-lg flex items-center justify-center overflow-hidden gap-x-3 mb-6">
+                                                        <div className="review-user-profile">
+                                                            <div className="image">
+                                                                <img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-2.png" alt="" className="w-60 object-cover" />
+                                                            </div>
+                                                            <span className="text-custom-green mt-1 font-medium text-lg block text-center">Sienna</span>
+                                                        </div>
+                                                        <div className="review-info">
+                                                            <div className="rating-date flex justify-between items-center">
+                                                                <span className="opacity-60 text-xs">December 4, 2022 at 3:12 pm</span>
+                                                                <Rating name="half-rating-read" defaultValue={3.5} precision={0.5} readOnly />
+                                                            </div>
+                                                            <p className="text-gray-600 w-full pr-0 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae iure nemo, voluptate repellat ipsa in. Id commodi accusantium totam impedit dolores aspernatur vero, hic magni?</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <br />
+
+                                                    {/* Review Form */}
+                                                    <form action="">
+                                                        <h4>Add a review</h4>
+                                                        <div className="form-group mt-4">
+                                                            <textarea name="" id="" cols="69" rows="5" className="outline-none border p-2" placeholder="Write Comment">
+                                                            </textarea>
+                                                        </div>
+
+                                                        <div className="grid grid-cols-12 gap-x-5 my-5">
+                                                            <div className="col-span-6">
+                                                                <input type="text" placeholder="Name" className="outline-none border p-2 w-full"/>
+                                                            </div>
+                                                            <div className="col-span-6">
+                                                            <input type="Email" placeholder="Email" className="outline-none border p-2 w-full"/>
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="text" placeholder="Website" className="outline-none border p-2 w-full mt-2"/>
+
+                                                        <button type="submit" className="bg-custom-green text-white py-2 px-6 rounded-md mt-5 btn hover:bg-yellow-hover">Submit Review</button>
+
+                                                    </form>
+                                                    
+                                                </div>
+                                                <div className="col-span-4"></div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+
+
+                                </div>
+                            </div>
+
                         </div>
-                        <div className="col-span-3 mb-5">
+                        <div className="col-span-3 mb-5 sticky top-[200px]">
                             <Sidebar />
                         </div>
                     </div>
-                </div>
-
-                <div className="details-page__tabs mt-5 p-5">
 
                 </div>
+
+
             </div>
         </div>
     )
