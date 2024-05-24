@@ -12,6 +12,7 @@ import CompareArrowsOutlinedIcon from '@mui/icons-material/CompareArrowsOutlined
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Product from "../../components/product";
 
 const DetailPage = () => {
     const zoomSliderRef = useRef();
@@ -44,6 +45,19 @@ const DetailPage = () => {
         arrows: true,
     };
 
+    var settings3 = {
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        fade: false,
+        arrows: true,
+        autoplay: 3000,
+        centerMode: true,
+      };
+    
+
     const goto = (index) => {
         zoomSliderRef.current.slickGoTo(index);
         zoomSliderBigRef.current.slickGoTo(index);
@@ -64,9 +78,7 @@ const DetailPage = () => {
                     <li className="text-sm">Seeds Of Change Organic</li>
                 </ul>
 
-                <div className="container-fluid details-container">
-                    <div className="grid grid-cols-12">
-                        <div className="col-span-9">
+                <div className="container-fluid details-container mx-auto">
                             {/* product zoom code start here */}
                             <div className="grid grid-cols-12">
                                 <div className="col-span-4">
@@ -195,14 +207,24 @@ const DetailPage = () => {
                                 {/* product info code end here */}
                             </div>
 
+
+
                             {/* details page tabs */}
-                            <div className="details-page__tabs mt-5 mr-10 p-5 border rounded-lg">
+                            <div className="details-page__tabs mt-5 mr-10 p-5 border mx-auto rounded-lg">
                                 <div className="custom-tabs">
                                     <ul className="flex items-center gap-x-14">
-                                        <li><button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(0)}>Description</button></li>
-                                        <li><button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(1)}>Additional info</button></li>
+                                        <li className={`${activeTab == 0 && 'text-custom-green'}`}>
+                                            <button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(0)}>Description
+                                            </button>
+                                        </li>
+                                        <li className={`${activeTab == 1 && 'text-custom-green'}`}>
+                                            <button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(1)}>Additional info
+                                            </button>
+                                        </li>
                                         {/* <li><button>Vendor</button></li> */}
-                                        <li><button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(2)}>Reviews (3)</button></li>
+                                        <li className={`${activeTab == 2 && 'text-custom-green'}`}>
+                                            <button className="py-2 px-6 border rounded-3xl" onClick={() => setActiveTab(2)}>Reviews (3)</button>
+                                        </li>
                                     </ul>
                                     <br />
 
@@ -332,7 +354,9 @@ const DetailPage = () => {
                                     {
                                         activeTab === 2 &&
                                         <div className="tab-content">
-                                            <div className="grid grid-cols-12">
+                                            <div className="grid grid-cols-12 gap-x-5">
+
+
                                                 <div className="col-span-8">
                                                     <h2>Customer questions & answers</h2>
                                                     <div className="review-card border p-4 mt-5 rounded-lg flex items-center justify-center overflow-hidden gap-x-3 mb-6">
@@ -399,45 +423,91 @@ const DetailPage = () => {
                                                     <br />
 
                                                     {/* Review Form */}
-                                                    <form action="">
+                                                    <form action="#">
                                                         <h4>Add a review</h4>
                                                         <div className="form-group mt-4">
-                                                            <textarea name="" id="" cols="69" rows="5" className="outline-none border p-2" placeholder="Write Comment">
+                                                            <textarea name="" id="" cols="69" rows="5" className="outline-none border p-2 w-full" placeholder="Write Comment">
                                                             </textarea>
                                                         </div>
 
                                                         <div className="grid grid-cols-12 gap-x-5 my-5">
                                                             <div className="col-span-6">
-                                                                <input type="text" placeholder="Name" className="outline-none border p-2 w-full"/>
+                                                                <input type="text" placeholder="Name" className="outline-none border p-2 w-full" />
                                                             </div>
                                                             <div className="col-span-6">
-                                                            <input type="Email" placeholder="Email" className="outline-none border p-2 w-full"/>
+                                                                <input type="Email" placeholder="Email" className="outline-none border p-2 w-full" />
                                                             </div>
                                                         </div>
 
-                                                        <input type="text" placeholder="Website" className="outline-none border p-2 w-full mt-2"/>
+                                                        <input type="text" placeholder="Website" className="outline-none border p-2 w-full mt-2" />
 
                                                         <button type="submit" className="bg-custom-green text-white py-2 px-6 rounded-md mt-5 btn hover:bg-yellow-hover">Submit Review</button>
 
                                                     </form>
-                                                    
+
                                                 </div>
-                                                <div className="col-span-4"></div>
+
+                                                <div className="col-span-4">
+                                                    <h4>Customer reviews</h4>
+                                                    <div className="flex items-center mt-2">
+                                                        <Rating name="half-rating-read" defaultValue={4.8} precision={0.5} readOnly />
+                                                        <strong>4.8 out of 5</strong>
+                                                    </div>
+                                                    <br />
+
+                                                    <div className="flex items-center mb-2">
+                                                        <span className="mr-3">5 star</span>
+                                                        <div class="progress" style={{ width: "75%", height: '15px' }}>
+                                                            <div class="progress-bar bg-success text-xs" style={{ width: "75%", height: '15px' }}>70%</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center mb-2">
+                                                        <span className="mr-3">4 star</span>
+                                                        <div class="progress" style={{ width: "75%", height: '15px' }}>
+                                                            <div class="progress-bar bg-success text-xs" style={{ width: "50%", height: '15px' }}>50%</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center mb-2">
+                                                        <span className="mr-3">3 star</span>
+                                                        <div class="progress" style={{ width: "75%", height: '15px' }}>
+                                                            <div class="progress-bar bg-success text-xs" style={{ width: "55%", height: '15px' }}>55%</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center mb-2">
+                                                        <span className="mr-3">2 star</span>
+                                                        <div class="progress" style={{ width: "75%", height: '15px' }}>
+                                                            <div class="progress-bar bg-success text-xs" style={{ width: "35%", height: '15px' }}>35%</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center mb-2">
+                                                        <span className="mr-3">1 star</span>
+                                                        <div class="progress" style={{ width: "75%", height: '15px' }}>
+                                                            <div class="progress-bar bg-success text-xs" style={{ width: "25%", height: '15px' }}>25%</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     }
-
-
-
-
                                 </div>
                             </div>
 
-                        </div>
-                        <div className="col-span-3 mb-5 sticky top-[200px]">
-                            <Sidebar />
-                        </div>
-                    </div>
+
+                            {/* Related Product Project */}
+                            <div className="relatedProjects mt-20 pb-10">
+                                <h2 className="heading">Related Products</h2>
+                                <Slider {...settings3}>
+                                    <div className="item"><Product tag='hot' /></div>
+                                    <div className="item"><Product tag='sale' /></div>
+                                    <div className="item"><Product tag='new' /></div>
+                                    <div className="item"><Product tag='best' /></div>
+                                    <div className="item"><Product tag='hot' /></div>
+                                    <div className="item"><Product tag='sale' /></div>
+                                    <div className="item"><Product tag='new' /></div>
+                                    <div className="item"><Product tag='best' /></div>
+                                </Slider>
+                            </div>
 
                 </div>
 

@@ -67,7 +67,7 @@ const Product = ({tag}) => {
                     <div className="flex items-center">
                         <span className='text-custom-green font-medium text-lg mr-3'>$28.85</span> <span className='text-sm opacity-60 text-black line-through'>$32.8</span>
                     </div>
-                    <button className='ml-auto border text-custom-green hover:bg-custom-green hover:text-white py-1 px-1 rounded text-sm'><ShoppingCartOutlinedIcon />Add</button>
+                    <button className='ml-auto border text-custom-green hover:bg-custom-green hover:text-white py-1 px-1 rounded text-sm'><ShoppingCartOutlinedIcon/>Add</button>
                 </div>
             </div>
         </div>
