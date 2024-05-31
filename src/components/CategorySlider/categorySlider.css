@@ -1,13 +1,14 @@
+
 .slick-slide{
     padding-right: 20px;
 }
 .cat-slider__main .slick-arrow.slick-next {
-        top: -32% !important;
-        right: 2% !important;
+        top: -10% !important;
+        right: 1% !important;
 }   
 
 .cat-slider__main .slick-arrow.slick-prev {
-    top: -32% !important;
+    top: -10% !important;
     left: inherit !important;
     right: 75px !important;
 }   

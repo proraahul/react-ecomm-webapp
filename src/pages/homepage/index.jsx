@@ -6,14 +6,21 @@ import Product from "../../components/product";
 import HomeSlider from "./Slider";
 import Slider from "react-slick";
 import TopProducts from '../homepage/topProducts';
+import { useEffect, useState } from "react";
 
-const HomePage = () => {
+const HomePage = ({ data }) => {
+  const [productData, setProductData] = useState(data);
+  const [categoryFilter, setCategoryFilter] = useState([]);
+  const [activeTab, setActiveTab] = useState();
+  const [activeTabData, setActiveTabData] = useState([]);
+  const [bestSells, setBestSells] = useState([]);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   var settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
     fade: false,
     arrows: true,
@@ -21,72 +28,105 @@ const HomePage = () => {
     centerMode: true,
   };
 
+
+
+  useEffect(() => {
+    const catArr = [];
+    productData?.length !== 0 && productData?.map((item, index) => {
+      item?.items?.map((_item, _index) => {
+        catArr.push(_item.cat_name)
+      })
+    })
+    const list = catArr.filter((item, index) => catArr.indexOf(item) === index);
+    setCategoryFilter(list);
+    setActiveTab(list[0]);
+  }, []);
+
+  useEffect(() => {
+    var arr = []
+    setActiveTabData(arr)
+    productData?.length !== 0 && productData?.map((item, index) => {
+      item?.items?.map((_item, _index) => {
+        if (_item.cat_name === activeTab) {
+          setActiveTabData(_item.products)
+        }
+      })
+    })
+  }, [activeTab, activeTabData])
+
+
+
+
+
+  const bestSellsArr = [];
+
+  useEffect(() => {
+
+    productData.length !== 0 &&
+      productData.map((item) => {
+        if (item.cat_name === 'Electronics') {
+          // console.log(item);
+          item.items.length !== 0 &&
+            item.items.map((_item) => {
+              // console.log(_item);
+              _item.products.length !== 0 &&
+                _item.products.map((product, index) => {
+                  // console.log(product);
+                  bestSellsArr.push(product)
+                })
+            })
+        }
+      });
+
+    setBestSells(bestSellsArr);
+    // console.log(bestSells);
+
+  }, []);
+
+
+
   return (
     <>
       <HomeSlider />
-      <CategorySlider />
+      <CategorySlider data={productData} />
       <Banners />
 
       <section className="py-6">
         <div className="container-fluid ">
-          <div className="flex items-center">
-            <h2 className="heading my-0">Popular products</h2>
-            <ul className="ml-auto flex gap-x-5 filterTab font-medium mb-0">
-              <li>
-                <Link>All</Link>
-              </li>
-              <li>
-                <Link>Milks & Dairies</Link>
-              </li>
-              <li>
-                <Link>Coffes & Teas</Link>
-              </li>
-              <li>
-                <Link>Pet Foods</Link>
-              </li>
-              <li>
-                <Link>Meats</Link>
-              </li>
-              <li>
-                <Link>Vegetables</Link>
-              </li>
-              <li>
-                <Link>Fruits</Link>
-              </li>
+          <div className="grid grid-cols-12">
+            <h2 className="heading my-0 col-span-4">Popular products</h2>
+            <ul className="flex gap-x-2 filterTab text-[10px] font-medium col-span-8">
+              {
+                categoryFilter.length !== 0 && categoryFilter.map((item, index) => {
+                  return (
+                    <li className="hover:text-custom-green" key={index}>
+                      <Link onClick={() => {
+                        // setActiveTabData([])
+                        setActiveTab(item);
+                        setActiveTabIndex(index);
+                      }}
+                        className={`capitalize hover:no-underline ${activeTabIndex === index && 'text-custom-green'}`}>
+                        {item}
+                      </Link>
+                    </li>
+                  )
+                })
+              }
             </ul>
           </div>
 
           <div className="grid grid-cols-5 gap-4 py-8">
-            <div>
-              <Product tag='hot' />
-            </div>
-            <div>
-              <Product tag='sale' />
-            </div>
-            <div>
-              <Product />
-            </div>
-            <div>
-              <Product tag='best' />
-            </div>
-            <div>
-              <Product tag='new' />
-            </div>
-            <div>
-              <Product tag='hot' />
-            </div>
-            <div>
-              <Product tag='sale' />
-            </div>
-            <div>
-              <Product tag='new' />
-            </div>
-            <div>
-              <Product tag='best' />
-            </div>
-            <div>
-              <Product tag='new' />
-            </div>
+            {
+              activeTabData.length !== 0 && activeTabData.map((item, index) => {
+                console.log(item);
+                return (
+                  <div className="item" key={index}>
+                    <Product tag={item.type} item={item}/>
+                  </div>
+                )
+              })
+
+            }
           </div>
         </div>
       </section>
@@ -96,35 +136,30 @@ const HomePage = () => {
         <div className="container-fluid ">
           <div className="flex items-center">
             <h2 className="heading my-0">Daily Best Sells</h2>
-            <ul className="ml-auto flex gap-x-5 filterTab font-medium mb-0">
-              <li>
-                <Link>Featured</Link>
-              </li>
-              <li>
-                <Link>Popular</Link>
-              </li>
-              <li>
-                <Link>New added</Link>
-              </li>
-
-            </ul>
           </div>
 
           <div className="mt-6 grid grid-cols-12">
 
             <div className="col-span-3">
-              <img src={DailyBestSellsBanner} alt="bring nature into your home image" className="rounded-3xl"/>
+              <img src={DailyBestSellsBanner} alt="bring nature into your home image" className="rounded-3xl w-full" />
             </div>
 
             <div className="col-span-9 product-slider">
               <Slider {...settings}>
 
-              <Product tag='hot' />
-              <Product tag='sale' />
-              <Product tag='new' />
-              <Product tag='best' />
-
+                {
+                  bestSells.length !== 0 &&
+                  bestSells.map((curItem, index) => {
+                    return (
+                      <div className="item" key={index}>
+                        <Product tag={curItem.type} item={curItem} />
+                      </div>
+                    )
+                  })
+                }
               </Slider>
+
+
             </div>
           </div>
 
@@ -134,22 +169,22 @@ const HomePage = () => {
 
 
       <section className="top-products__section mb-10 px-9">
-            <div className="container-fluid">
-              <div className="grid grid-cols-12 gap-x-5">
-                <div className="col-span-3 flex-col">
-                    <TopProducts title='Top Selling'/>
-                </div>
-                <div className="col-span-3 flex-col">
-                <TopProducts title='Trending Products'/>
-                  </div>
-                  <div className="col-span-3 flex-col">
-                  <TopProducts title='Recently added'/>
-                  </div>
-                  <div className="col-span-3 flex-col">
-                  <TopProducts title='Top Rated'/>
-                  </div> 
-              </div>
+        <div className="container-fluid">
+          <div className="grid grid-cols-12 gap-x-5">
+            <div className="col-span-3 flex-col">
+              <TopProducts title='Top Selling' />
             </div>
+            <div className="col-span-3 flex-col">
+              <TopProducts title='Trending Products' />
+            </div>
+            <div className="col-span-3 flex-col">
+              <TopProducts title='Recently added' />
+            </div>
+            <div className="col-span-3 flex-col">
+              <TopProducts title='Top Rated' />
+            </div>
+          </div>
+        </div>
       </section>
 
 

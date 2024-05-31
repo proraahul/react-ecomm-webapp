@@ -19,7 +19,7 @@ const HomeSlider = () => {
       };
 
   return (
-    <section className="py-6 container-fluid z-10">
+    <section className="py-6 container-fluid z-0">
         <div className="relative">
         <Slider {...settings} className='rounded-3xl overflow-hidden'>
             <div className="relative">

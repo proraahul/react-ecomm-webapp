@@ -1,192 +1,191 @@
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import BlackDownArrow from '../assets/icons/arrow-down-black.svg';
-import BlackUpArrow from '../assets/icons/arrow-up-black.svg';
-import KeyboardDownArrow from '../assets/icons/keyboard-down-arrow.svg'
-import gridView from '../assets/icons/grid-view.svg';
-import HeadPhones from '../assets/icons/headphones.svg'
-import BannerMenu from '../assets/images/banner-menu.png'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import GridViewIcon from '@mui/icons-material/GridView';
+import HeadphonesOutlinedIcon from '@mui/icons-material/HeadphonesOutlined';
+import { useState } from 'react';
 
-const Nav = () => {
+const Nav = (props) => {
+  const [navData, setNavData] = useState([]);
+  const [isOpenNav, setIsOpenNav] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [openDropdownMenu, setDropdownMenu] = useState(false);
+  const [openDropdownMenuIndex, setDropdownMenuIndex] = useState(null);
 
+  const [openMegaMenu, setOpenMegaMenu] = useState(false);
+
+  useEffect(() => {
+    setNavData(props.data);
+  }, [])
+
+  useEffect(() => {
+    setIsOpenNav(props.openNav)
+  }, [props.openNav])
+
+
+  const openDropdownFun = (index) => {
+    setDropdownMenu(!openDropdownMenu)
+    setDropdownMenuIndex(index)
+  }
 
   return (
-    <div className="w-full h-auto border-t border-b border-[rgba(0,0,0,0.1)] flex items-center z-50">
-      <div className="container-fluid grid grid-cols-12 items-center relative">
+    <>
+      {
+        isOpenNav === true && <div className='navbarOverlay'></div>
+      }
+      <div className='nav flex items-center'>
+        <div className='w-full container-fluid grid grid-cols-12 relative'>
 
-          <div className="col-span-3">
-            <div className="px-3 bg-custom-green rounded-sm text-white inline-flex items-center">
-              <img src={gridView} alt="grid view icon" />
-              <button className="bg-custom-green p-3 text-base">Browse All Categories
-              </button>
-              <img src={KeyboardDownArrow} alt="key down icon" />
-              {/* <img src={KeyboardUpArrow} alt="key down icon" /> */}
-            </div>
+          <div className='col-span-3 part1 flex items-center'>
+            <button className='bg-custom-green text-white catTab'>
+              <GridViewIcon /> &nbsp;Browse All Categories <KeyboardArrowDownIcon /></button>
           </div>
 
-          <div className="col-span-7 static">
-            <nav>
-              <ul className='flex justify-start gap-x-3 text-black opacity-80 text-lg static'>
-                {/* <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link> Deals </Link> </button>
-                </li> */}
+          <div className='col-span-7 static mb-0 flex items-center'>
+            <nav className={isOpenNav === true ? 'open' : ''}>
+              <ul className='mb-0 flex items-center gap-x-7'>
                 <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link to={'/listing'}> Home </Link> </button>
+                  <button><Link to={'/'}>Home</Link></button>
                 </li>
-                <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link> About </Link> </button>
-                </li>
-                <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link> Shop </Link> </button>
-                </li>
-                <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link> Vendors </Link> </button>
-                </li>
-                <li className='static list-item'>
-                  <button className='py-4 px-2 hover:text-custom-green flex'><Link>Mega menu</Link><img src={BlackDownArrow} /></button>
 
-                  {/* show when Hover on Mega menu */}
-{/* */}
-                  <div className='p-2 w-full absolute top-[160%] left-0 h-auto bg-white text-base text-black font-medium dropdown-menu backdrop-blur-3xl box-shadow'>
+                {
+                  navData.length !== 0 &&
+                  navData.slice(0, -1).map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <button
+                          onClick={() => openDropdownFun(index)}>
+                          <a href={`${windowWidth > 992 ? `/cat/${item.cat_name.toLowerCase()}` : '#'}`}
+                            onClick={() => sessionStorage.setItem('cat', item.cat_name)}>
+                            {item.cat_name}
+                            <KeyboardArrowDownIcon
+                              className={`${openDropdownMenu === true && openDropdownMenuIndex === index && 'rotateIcon'}`} />
+                          </a>
+                        </button>
 
-                   <div className='grid grid-cols-12 p-6'>
-                   <div className='col-span-3'>
-                          <div className="flex justify-center flex-col">
-                          <h4 className='text-custom-green text-xl'>Fruit & Vegetables</h4>
-                          <ul className='text-black opacity-80 mt-3'>
-                            <li className='block mb-2'>
-                              <Link>Meat & Poultry</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Fresh vegetables</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Herbs & Seasonings</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Cuts & Sprouts</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Exotic Fruits & Vaggies</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Packaged Produce</Link>
-                            </li>
-                          </ul>
+                        {
+                          item?.items?.length !== 0 &&
+                          <div className={`dropdown_menu ${openDropdownMenu === true && openDropdownMenuIndex === index && 'open'}`}>
+                            <ul className='p-3'>
+                              {item?.items?.map((item_, index_) => {
+                                return (
+                                  <li key={index_} className='py-2'>
+                                    <a href={`/cat/${item.cat_name.toLowerCase()}/${item_.cat_name.replace(/\s/g, '-').toLowerCase()}`}
+                                      onClick={() => sessionStorage.setItem('cat', item.cat_name)} className='hover:no-underline hover:text-custom-green'>
+                                      {item_.cat_name}
+                                    </a>
+                                  </li>
+                                )
+                              })}
+                            </ul>
                           </div>
-                    </div>
-                    <div className='col-span-3'>
-                   <div className="flex justify-center">
-                   <h4 className='text-custom-green text-xl'>Breakfast & Dairy</h4>
-                   <ul className='text-black opacity-80 mt-10 -ml-44'>
-                            <li className='block mb-2'>
-                              <Link>Milk & Flavoured Milk</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Butter and Margorine</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Eggs Substitues</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Marmalades</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Sour cream</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Chees</Link>
-                            </li>
-                          </ul>
-                   </div>
-                    </div>
-                    <div className='col-span-3'>
-                    <div className="flex justify-center">
-                    <h4 className='text-custom-green text-xl'>Meat & Seafood</h4>
-                    <ul className='text-black opacity-80 mt-10 -ml-40'>
-                            <li className='block mb-2'>
-                              <Link>Breakfast Sausage</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Dinner Sausage</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Chiken</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Sliced Deli Meat</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Wild Caught Fillets</Link>
-                            </li>
-                            <li className='block mb-2'>
-                              <Link>Crab and Shellfish</Link>
-                            </li>
-                          </ul>
-                    </div>
-                    </div>
-                    <div className='col-span-3'>
-                         <div className="flex justify-center">
-                          <img src={BannerMenu} alt="" />
-                         </div>
-                    </div>
-                   </div>
+                        }
+                      </li>
+                    )
 
+                  })
+                }
+
+                <li><Link to={'/about'}>About</Link></li>
+
+
+                <li className='static'>
+                  <button onClick={() => setOpenMegaMenu(!openMegaMenu)}>
+                    <Link>Mega Menu<KeyboardArrowDownIcon className={`${openMegaMenu === true && 'rotateIcon'}`} />
+                    </Link>
+                  </button>
+
+                  <div className={`dropdown_menu megaMenu absolute ${openMegaMenu === true && 'open'}`}>
+                    <div className='grid grid-cols-12 gap-x-4'>
+                      {props.data.length !== 0 &&
+                        props.data.map((item, index) => {
+                          return (
+                            <div className='col-span-4' key={index}>
+                              <Link to={`/cat/${item.cat_name}`}>
+                                <h4 className='text-custom-green capitalize text-lg font-medium'>{item.cat_name}</h4>
+                              </Link>
+                              {item?.items?.length !== 0 &&
+                                <ul className='mt-4 mb-0'>
+                                  {item?.items?.map((item_, _index) => {
+                                    return (
+                                      <li key={_index} className='text-sm'>
+                                        <Link to={`/cat/${item.cat_name}/${item_.cat_name.replace(/\s/g, '-')}`} className='text-sm'>
+                                          {item_.cat_name}
+                                        </Link>
+                                      </li>
+                                    )
+                                  })}
+                                </ul>
+                              }
+                            </div>
+                          )
+                        })}
+                    </div>
                   </div>
                 </li>
                 <li>
-                  <button className='py-4 px-2 hover:text-custom-green'><Link>Blogs</Link></button>
+                  <button><Link>Blog</Link></button>
                 </li>
-                <li className='relative list-item'
-                >
-                  <button
-                    className='py-4 px-2 hover:text-custom-green flex'
-                  >
-                    Pages
-                    <img src={BlackDownArrow} />
-                  </button>
+                {/* <li className='list-inline-item'>
+                                        <Button><Link>Pages  <KeyboardArrowDownIcon /></Link>
+                                        </Button>
 
-                  {/* pages dropdown on hover*/}
+                                        <div className='dropdown_menu'>
+                                            <ul>
+                                                <li><Button><Link to="/about">About Us</Link></Button></li>
+                                                <li><Button><Link to="/about">Contact</Link></Button></li>
+                                                <li><Button><Link to="/about">My Account</Link></Button></li>
+                                                <li><Button><Link to="/about">Login</Link></Button></li>
+                                                <li><Button><Link to="/about">Register</Link></Button></li>
+                                                <li><Button><Link to="/about">Forgot password</Link></Button></li>
+                                                <li><Button><Link to="/about">Reset password</Link></Button></li>
+                                                <li><Button><Link to="/about">Purchase Guide</Link></Button></li>
+                                                <li><Button><Link to="/about">Privacy Policy</Link></Button></li>
+                                                <li><Button><Link to="/about">Terms of Service</Link></Button></li>
+                                                <li><Button><Link to="/about">404 Page</Link></Button></li>
+                                            </ul>
+                                        </div>
 
-                  <ul className='p-2 w-60 absolute top-[160%] h-auto bg-white text-base text-black font-medium dropdown-menu backdrop-blur-3xl box-shadow'>
-
-                    <Link to={'/about'} className='py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>About Us</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>Contact</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>My Account</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>Login</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green  hover:bg-[#f1f1f1]'>Register</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>Forget Password</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>Reset Password</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>Purchase Guide</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>Privacy Policy</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>Terms of service</Link>
-                    <Link className='flex py-3 px-4 hover:text-custom-green hover:bg-[#f1f1f1]'>404 page</Link>
-                  </ul>
-
-
-                </li>
+                                    </li> */}
                 <li>
-                  <button className='py-4 px-2 hover:text-custom-green'> <Link>Contact</Link> </button>
+                  <button><Link>Contact</Link></button>
                 </li>
               </ul>
+
+              {
+                windowWidth < 992 &&
+                <>
+                  {
+                    context.isLogin !== "true" &&
+                    <div className='pl-3 pr-3'>
+                      <br />
+                      <Link to={'/signIn'}>
+                        <button className="btn btn-g btn-lg w-full" onClick={closeNav}>Sign In</button>
+                      </Link>
+                    </div>
+                  }
+
+                </>
+              }
+
             </nav>
           </div>
 
-          <div className="col-span-2">
-            <div>
-              <div className="flex justify-end pl-14">
-                <img src={HeadPhones} alt="" className='w-10 opacity-80' />
-                <div className='ml-3 w-full'>
-                  <h3 className='text-custom-green mb-0 font-medium text-xl'>1900 - 888</h3>
-                  <p className='mb-0 text-xs text-gray-400'>24/7 Support Center</p>
-                </div>
-
+          <div className='col-span-2 part3 flex items-center'>
+            <div className='phNo flex items-center ml-auto'>
+              <span><HeadphonesOutlinedIcon /></span>
+              <div className='info ml-3'>
+                <h3 className='text-custom-green mb-0'>1900 - 888</h3>
+                <p className='px-0'>24/7 Support Center</p>
               </div>
             </div>
           </div>
 
         </div>
-    </div>
+
+      </div>
+    </>
   )
 }
 
-export default Nav
+export default Nav;

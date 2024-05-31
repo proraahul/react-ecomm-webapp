@@ -1,13 +1,30 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import SortOutlinedIcon from '@mui/icons-material/SortOutlined';
 import Product from "../../components/product";
 import Sidebar from "../../components/sidebar";
 
-const Listing = () => {
+const Listing = ({single,data}) => {
     const [isOpenAccount, setIsOpenAccount] = useState(false);
     const [isOpenAccount2, setIsOpenAccount2] = useState(false);
+    const [Alldata, setAllData] = useState(data);
+
+    const {id} = useParams();
+
+    useEffect(() => {
+        var itemData = [];
+        Alldata.length !==0 && Alldata.map((item,index)=>{
+            if(single){
+                if(item.cat_name == id){
+                    item.items.length !==0 && item.items.map((_item, _index)=>{
+                        itemData.push({..._item, parentCatName:item.cat_name, childCatName: _item.cat_name});
+                    })
+                }
+            }
+        })
+    }, []);
+
     return (
         <section className="listing-page w-full h-auto py-11">
             <div className="container-fluid">
