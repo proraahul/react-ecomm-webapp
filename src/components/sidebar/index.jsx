@@ -1,21 +1,45 @@
 import Slider from '@mui/material/Slider';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import BannerImg from '../../assets/images/banner1.jpg';
+import { Link } from 'react-router-dom';
 
 function valuetext(value) {
   return `${value}°C`;
 }
 
-const Sidebar = () => {
+const Sidebar = ({ data, currentCatData }) => {
   const [value, setValue] = useState([120, 700]);
+  const [totalLength, setTotalLength] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+  var catLength = 0;
+  var lengthArr = [];
+  useEffect(() => {
+    data?.length !== 0 &&
+      data.map((item) => {
+        item?.items?.length !== 0 &&
+          item?.items?.map((_item) => {
+            catLength += _item.products.length
+          })
+        lengthArr.push(catLength)
+        // console.log(catLength);
+        catLength = 0;
+      });
+
+    const list = lengthArr?.filter((item, index) => lengthArr.indexOf(item) === index);
+    setTotalLength(list);
+
+    // console.log(lengthArr)
+  }, []);
+
 
   return (
     <>
@@ -26,34 +50,27 @@ const Sidebar = () => {
          after:w-full 
         after:h-[3px] after:bg-[#ccc] 
         after:absolute after:bottom-0 after:left-0 
-        before:content-[""] before:w-1/5 before:h-[3px] before:bg-[#b0e5c2] before:absolute before:bottom-0 before:left-0 before:z-10'>Category</h3>
+        before:content-[""] before:w-1/5 before:h-[3px] before:bg-[#b0e5c2] before:absolute before:bottom-0 before:left-0 before:z-10'>
+            Category
+          </h3>
 
           <div className="cat-list">
-            <div className="cat-item flex items-center p-3 cursor-pointer my-2 rounded-md">
-              <span><img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg" alt="" width={30} /></span>
-              <h4 className='mb-0 ml-3'>Milk & Dairies</h4>
-              <span className="flex items-center justify-center rounded-full ml-auto bg-[#BCE3C9] p-2 text-xs">30</span>
-            </div>
-            <div className="cat-item flex items-center p-3 cursor-pointer my-2 rounded-md">
-              <span><img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg" alt="" width={30} /></span>
-              <h4 className='mb-0 ml-3'>Milk & Dairies</h4>
-              <span className="flex items-center justify-center rounded-full ml-auto bg-[#BCE3C9] p-2 text-xs">30</span>
-            </div>
-            <div className="cat-item flex items-center p-3 cursor-pointer my-2 rounded-md">
-              <span><img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg" alt="" width={30} /></span>
-              <h4 className='mb-0 ml-3'>Milk & Dairies</h4>
-              <span className="flex items-center justify-center rounded-full ml-auto bg-[#BCE3C9] p-2 text-xs">30</span>
-            </div>
-            <div className="cat-item flex items-center p-3 cursor-pointer my-2 rounded-md">
-              <span><img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg" alt="" width={30} /></span>
-              <h4 className='mb-0 ml-3'>Milk & Dairies</h4>
-              <span className="flex items-center justify-center rounded-full ml-auto bg-[#BCE3C9] p-2 text-xs">30</span>
-            </div>
-            <div className="cat-item flex items-center p-3 cursor-pointer my-2 rounded-md">
-              <span><img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg" alt="" width={30} /></span>
-              <h4 className='mb-0 ml-3'>Milk & Dairies</h4>
-              <span className="flex items-center justify-center rounded-full ml-auto bg-[#BCE3C9] p-2 text-xs">30</span>
-            </div>
+            {
+              data.length !== 0 &&
+              data.slice(0,-1).map((item, index) => {
+                return (
+                  <Link to={`/cat/${item.cat_name}`} key={index} className='hover:no-underline hover:text-custom-green'>
+                    <div className="cat-item flex items-center p-3 cursor-pointer my-2 rounded-md">
+                      <span>
+                        <img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg" alt={item.cat_name} width={30} />
+                      </span>
+                      <h4 className='mb-0 ml-3'>{item.cat_name}</h4>
+                      <span className="flex items-center justify-center rounded-full ml-auto bg-[#BCE3C9] p-2 text-xs">{totalLength[index]}</span>
+                    </div>
+                  </Link>
+                )
+              })
+            }
           </div>
         </div>
 

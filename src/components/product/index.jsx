@@ -27,7 +27,7 @@ const Product = ({ tag, item }) => {
 
             {
                 tag!== null && tag!== undefined &&
-                <span className='badge absolute top-0 left-0 inline-block z-10 text-white py-2 px-5 text-xs rounded-b-full rounded-l-md capitalize' style={bgStyle}>
+                <span className='badge absolute top-0 left-0 inline-block z-10 text-white py-1 px-3 text-xs rounded-b-full rounded-l-md capitalize' style={bgStyle}>
                     {tag}
                 </span>
             }
@@ -45,21 +45,24 @@ const Product = ({ tag, item }) => {
                                 <ul className="bg-white w-[120px] h-auto rounded-lg flex items-center justify-center border overflow-hidden text-custom-green">
                                     <li>
                                         <Tooltip title="Add to Wishlist" placement='top'>
-                                            <a href="#" className='block p-2 hover:text-black hover:opacity-70'><FavoriteBorderOutlinedIcon />
+                                            <a href="#" className='block p-2 hover:text-black hover:opacity-70'>
+                                                <FavoriteBorderOutlinedIcon />
                                             </a>
                                         </Tooltip>
 
                                     </li>
                                     <li>
                                         <Tooltip title="Compare" placement='top'>
-                                            <a href="#" className='block p-2 border-l border-r hover:text-black hover:opacity-70'><CompareArrowsOutlinedIcon />
+                                            <a href="#" className='block p-2 border-l border-r hover:text-black hover:opacity-70'>
+                                                <CompareArrowsOutlinedIcon />
                                             </a>
                                         </Tooltip>
 
                                     </li>
                                     <li>
                                         <Tooltip title="Quick View" placement='top'>
-                                            <a href="#" className='block p-2 hover:text-black hover:opacity-70'><RemoveRedEyeOutlinedIcon />
+                                            <a href="#" className='block p-2 hover:text-black hover:opacity-70'>
+                                                <RemoveRedEyeOutlinedIcon />
                                             </a>
                                         </Tooltip>
                                     </li>
@@ -70,7 +73,7 @@ const Product = ({ tag, item }) => {
 
                     <div className="info">
                         <span className="block text-faded-black text-sm">{productData.brand}</span>
-                        <h4 className='font-medium my-2 hover:text-custom-green leading-5'><Link>{productData.productName.substr(0, 50) + '...'}</Link></h4>
+                        <h4 className='font-medium my-2 hover:text-custom-green leading-5'><Link>{productData?.productName?.substr(0, 50) + '...'}</Link></h4>
                         <Rating name="half-rating-read" value={parseFloat(productData.rating)} precision={0.5} readOnly />
                         <span className='block text-black opacity-60 text-xs'>By <Link className='text-custom-green'>{productData.brand}</Link></span>
 
@@ -78,8 +81,8 @@ const Product = ({ tag, item }) => {
                             <div className="flex items-center">
                                 <span className='text-custom-green font-medium text-lg mr-3'>Rs {productData.price}</span> <span className='text-sm opacity-60 text-black line-through'>Rs {productData.oldPrice}</span>
                             </div>
-                            <button className='mi-auto border text-custom-green hover:bg-custom-green hover:text-white py-1 px-1 rounded text-sm'><ShoppingCartOutlinedIcon />Add</button>
                         </div>
+                        <button className='w-full mt-1 border-none font-medium bg-green-100 text-custom-green hover:bg-custom-green hover:text-white py-1 px-1 rounded text-sm'><ShoppingCartOutlinedIcon />Add</button>
                     </div>
 
                 </>

@@ -91,7 +91,7 @@ const HomePage = ({ data }) => {
       <CategorySlider data={productData} />
       <Banners />
 
-      <section className="py-6">
+      <section className="py-6 home-products__wrapper">
         <div className="container-fluid ">
           <div className="grid grid-cols-12">
             <h2 className="heading my-0 col-span-4">Popular products</h2>
@@ -101,7 +101,6 @@ const HomePage = ({ data }) => {
                   return (
                     <li className="hover:text-custom-green" key={index}>
                       <Link onClick={() => {
-                        // setActiveTabData([])
                         setActiveTab(item);
                         setActiveTabIndex(index);
                       }}
@@ -115,10 +114,9 @@ const HomePage = ({ data }) => {
             </ul>
           </div>
 
-          <div className="grid grid-cols-5 gap-4 py-8">
+          <div className="grid grid-cols-5 gap-4 py-8 product_row">
             {
               activeTabData.length !== 0 && activeTabData.map((item, index) => {
-                console.log(item);
                 return (
                   <div className="item" key={index}>
                     <Product tag={item.type} item={item}/>

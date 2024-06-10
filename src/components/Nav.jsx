@@ -53,14 +53,14 @@ const Nav = (props) => {
                   navData.slice(0, -1).map((item, index) => {
                     return (
                       <li key={index}>
-                        <button
-                          onClick={() => openDropdownFun(index)}>
-                          <a href={`${windowWidth > 992 ? `/cat/${item.cat_name.toLowerCase()}` : '#'}`}
-                            onClick={() => sessionStorage.setItem('cat', item.cat_name)}>
+                        <button onClick={() => openDropdownFun(index)}>
+                          <Link to={`${`/cat/${item.cat_name}`}`}
+                            onClick={() => sessionStorage.setItem('cat', item.cat_name)}
+                          >
                             {item.cat_name}
                             <KeyboardArrowDownIcon
                               className={`${openDropdownMenu === true && openDropdownMenuIndex === index && 'rotateIcon'}`} />
-                          </a>
+                          </Link>
                         </button>
 
                         {
@@ -70,10 +70,11 @@ const Nav = (props) => {
                               {item?.items?.map((item_, index_) => {
                                 return (
                                   <li key={index_} className='py-2'>
-                                    <a href={`/cat/${item.cat_name.toLowerCase()}/${item_.cat_name.replace(/\s/g, '-').toLowerCase()}`}
+                                    <Link
+                                      to={`/cat/${item.cat_name}/${item_.cat_name.split(' ').join('-').toLowerCase()}`}
                                       onClick={() => sessionStorage.setItem('cat', item.cat_name)} className='hover:no-underline hover:text-custom-green'>
                                       {item_.cat_name}
-                                    </a>
+                                    </Link>
                                   </li>
                                 )
                               })}
@@ -156,13 +157,13 @@ const Nav = (props) => {
                 windowWidth < 992 &&
                 <>
                   {
-                    context.isLogin !== "true" &&
-                    <div className='pl-3 pr-3'>
-                      <br />
-                      <Link to={'/signIn'}>
-                        <button className="btn btn-g btn-lg w-full" onClick={closeNav}>Sign In</button>
-                      </Link>
-                    </div>
+                    // context.isLogin !== "true" &&
+                    // <div className='pl-3 pr-3'>
+                    //   <br />
+                    //   <Link to={'/signIn'}>
+                    //     <button className="btn btn-g btn-lg w-full" onClick={closeNav}>Sign In</button>
+                    //   </Link>
+                    // </div>
                   }
 
                 </>
